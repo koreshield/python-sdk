@@ -84,7 +84,7 @@ class KoreShieldClient:
             {
                 "X-API-Key": api_key,
                 "Content-Type": "application/json",
-                "User-Agent": f"koreshield-python-sdk/{__version__}",
+                "User-Agent": f"koreshield-python/{__version__}",
             }
         )
 

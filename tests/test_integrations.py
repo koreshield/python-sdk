@@ -154,9 +154,9 @@ class TestFrameworkIntegrations:
         mock_request.is_json = True
         mock_request.get_json.return_value = {"prompt": "hello"}
 
-        with patch('koreshield_sdk.integrations.frameworks.request', mock_request, create=True), \
-             patch('koreshield_sdk.integrations.frameworks.g', Mock(), create=True), \
-             patch('koreshield_sdk.integrations.frameworks.jsonify', Mock(), create=True):
+        with patch('koreshield.integrations.frameworks.request', mock_request, create=True), \
+             patch('koreshield.integrations.frameworks.g', Mock(), create=True), \
+             patch('koreshield.integrations.frameworks.jsonify', Mock(), create=True):
             middleware()
 
         mock_client.scan_prompt.assert_called_once()
@@ -267,9 +267,9 @@ class TestFrameworkIntegrations:
         mock_request.is_json = True
         mock_request.get_json.return_value = {"prompt": "hello"}
 
-        with patch('koreshield_sdk.integrations.frameworks.request', mock_request, create=True), \
-             patch('koreshield_sdk.integrations.frameworks.g', Mock(), create=True), \
-             patch('koreshield_sdk.integrations.frameworks.jsonify', Mock(return_value={"error": "Security threat detected"}), create=True):
+        with patch('koreshield.integrations.frameworks.request', mock_request, create=True), \
+             patch('koreshield.integrations.frameworks.g', Mock(), create=True), \
+             patch('koreshield.integrations.frameworks.jsonify', Mock(return_value={"error": "Security threat detected"}), create=True):
             result = middleware()
 
         assert result is not None

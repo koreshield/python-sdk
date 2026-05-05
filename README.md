@@ -75,7 +75,7 @@ pip install koreshield[fastapi,flask,django]
 ### Basic Usage
 
 ```python
-from koreshield_sdk import KoreShieldClient
+from koreshield import KoreShieldClient
 
 # Initialize client
 client = KoreShieldClient(api_key="your-api-key")
@@ -89,7 +89,7 @@ print(f"Safe: {result.is_safe}, Threat Level: {result.threat_level}")
 
 ```python
 import asyncio
-from koreshield_sdk import AsyncKoreShieldClient
+from koreshield import AsyncKoreShieldClient
 
 async def main():
     async with AsyncKoreShieldClient(api_key="your-api-key", enable_metrics=True) as client:
@@ -108,7 +108,7 @@ asyncio.run(main())
 ```python
 from langchain_openai import ChatOpenAI
 from langchain.schema import HumanMessage
-from koreshield_sdk.integrations import create_koreshield_callback
+from koreshield.integrations import create_koreshield_callback
 
 # Create security callback
 security_callback = create_koreshield_callback(
@@ -127,7 +127,7 @@ response = llm([HumanMessage(content="Hello!")])
 KoreShield provides advanced scanning for RAG (Retrieval-Augmented Generation) systems to detect indirect prompt injection attacks in retrieved documents:
 
 ```python
-from koreshield_sdk import KoreShieldClient
+from koreshield import KoreShieldClient
 
 client = KoreShieldClient(
     api_key="your-api-key",
@@ -194,7 +194,7 @@ Automatic scanning for LangChain retrievers:
 
 ```python
 from langchain.vectorstores import Chroma
-from koreshield_sdk.integrations.langchain import SecureRetriever
+from koreshield.integrations.langchain import SecureRetriever
 
 # Wrap your retriever
 retriever = vectorstore.as_retriever()
@@ -384,7 +384,7 @@ client = KoreShieldClient(
 ### Basic Scanning
 
 ```python
-from koreshield_sdk import KoreShieldClient
+from koreshield import KoreShieldClient
 
 client = KoreShieldClient(api_key="your-api-key")
 
@@ -408,7 +408,7 @@ for prompt, result in zip(prompts, results):
 
 ```python
 import asyncio
-from koreshield_sdk import AsyncKoreShieldClient
+from koreshield import AsyncKoreShieldClient
 
 async def main():
     async with AsyncKoreShieldClient(api_key="your-api-key", enable_metrics=True) as client:
@@ -451,8 +451,8 @@ asyncio.run(main())
 Security policies in the SDK are client-side filters. KoreShield server policies still apply on the proxy.
 
 ```python
-from koreshield_sdk import AsyncKoreShieldClient
-from koreshield_sdk.types import SecurityPolicy, ThreatLevel
+from koreshield import AsyncKoreShieldClient
+from koreshield.types import SecurityPolicy, ThreatLevel
 
 async def main():
     # Create custom security policy
@@ -492,7 +492,7 @@ asyncio.run(main())
 
 ```python
 from fastapi import FastAPI, Request
-from koreshield_sdk.integrations import create_fastapi_middleware
+from koreshield.integrations import create_fastapi_middleware
 
 app = FastAPI()
 
@@ -524,7 +524,7 @@ async def chat(request: Request, message: str):
 
 ```python
 from flask import Flask, request, jsonify, g
-from koreshield_sdk.integrations import create_flask_middleware
+from koreshield.integrations import create_flask_middleware
 
 app = Flask(__name__)
 
@@ -572,7 +572,7 @@ KORESHIELD_CONFIG = {
 }
 
 # middleware.py
-from koreshield_sdk.integrations import create_django_middleware
+from koreshield.integrations import create_django_middleware
 
 KoreShieldMiddleware = create_django_middleware()
 
@@ -607,8 +607,8 @@ class ChatView(View):
 ## Error Handling
 
 ```python
-from koreshield_sdk import KoreShieldClient
-from koreshield_sdk.exceptions import (
+from koreshield import KoreShieldClient
+from koreshield.exceptions import (
     AuthenticationError,
     ValidationError,
     RateLimitError,
@@ -698,7 +698,7 @@ async with AsyncKoreShieldClient(api_key="your-api-key", enable_metrics=True) as
 ### Security Policy Management
 
 ```python
-from koreshield_sdk.types import SecurityPolicy, ThreatLevel
+from koreshield.types import SecurityPolicy, ThreatLevel
 
 # Create and apply custom policy
 policy = SecurityPolicy(

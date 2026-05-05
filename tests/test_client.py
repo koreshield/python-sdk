@@ -42,7 +42,7 @@ class TestKoreShieldClient:
         assert client.auth_config.base_url == "https://api.test.com"
         assert client.session.headers["Authorization"] == "Bearer test-key"
 
-    @patch('koreshield_sdk.client.requests.Session.request')
+    @patch('koreshield.client.requests.Session.request')
     def test_scan_prompt_success(self, mock_request, client, mock_response):
         """Test successful prompt scanning."""
         mock_response_obj = Mock()
@@ -64,7 +64,7 @@ class TestKoreShieldClient:
         assert call_args[1]["url"] == "https://api.test.com/v1/scan"
         assert call_args[1]["json"]["prompt"] == "Test prompt"
 
-    @patch('koreshield_sdk.client.requests.Session.request')
+    @patch('koreshield.client.requests.Session.request')
     def test_scan_prompt_with_context(self, mock_request, client, mock_response):
         """Test prompt scanning with additional context."""
         mock_response_obj = Mock()
@@ -86,7 +86,7 @@ class TestKoreShieldClient:
         assert request_data["session_id"] == "session456"
         assert request_data["custom_field"] == "value"
 
-    @patch('koreshield_sdk.client.requests.Session.request')
+    @patch('koreshield.client.requests.Session.request')
     def test_scan_prompt_authentication_error(self, mock_request, client):
         """Test authentication error handling."""
         mock_response = Mock()
@@ -99,7 +99,7 @@ class TestKoreShieldClient:
 
         assert "Invalid API key" in str(exc_info.value)
 
-    @patch('koreshield_sdk.client.requests.Session.request')
+    @patch('koreshield.client.requests.Session.request')
     def test_scan_prompt_rate_limit_error(self, mock_request, client):
         """Test rate limit error handling."""
         mock_response = Mock()
@@ -112,7 +112,7 @@ class TestKoreShieldClient:
 
         assert "Rate limit exceeded" in str(exc_info.value)
 
-    @patch('koreshield_sdk.client.requests.Session.request')
+    @patch('koreshield.client.requests.Session.request')
     def test_scan_batch(self, mock_request, client, mock_response):
         """Test batch scanning."""
         # Mock batch response
@@ -142,7 +142,7 @@ class TestKoreShieldClient:
         call_args = mock_request.call_args
         assert call_args[1]["url"] == "https://api.test.com/v1/scan/batch"
 
-    @patch('koreshield_sdk.client.requests.Session.request')
+    @patch('koreshield.client.requests.Session.request')
     def test_health_check(self, mock_request, client):
         """Test health check endpoint."""
         health_response = {
@@ -201,7 +201,7 @@ class TestKoreShieldClient:
         assert result.documents[0].query_similarity <= 0.15
         assert result.documents[0].directive_score > 0
 
-    @patch('koreshield_sdk.client.requests.Session.request')
+    @patch('koreshield.client.requests.Session.request')
     def test_scan_tool_call(self, mock_request, client):
         """Test server-side tool-call scanning."""
         mock_response_obj = Mock()
@@ -359,7 +359,7 @@ class TestKoreShieldClient:
 #         }
 #
 #     @pytest.mark.asyncio
-#     @patch('koreshield_sdk.async_client.httpx.AsyncClient.request')
+#     @patch('koreshield.async_client.httpx.AsyncClient.request')
 #     async def test_scan_prompt_success(self, mock_request, async_client, mock_response):
 #         """Test successful async prompt scanning."""
 #         mock_response_obj = Mock()
@@ -377,7 +377,7 @@ class TestKoreShieldClient:
 #         assert result.indicators[0].type == DetectionType.KEYWORD
 #
 #     @pytest.mark.asyncio
-#     @patch('koreshield_sdk.async_client.httpx.AsyncClient.request')
+#     @patch('koreshield.async_client.httpx.AsyncClient.request')
 #     async def test_scan_batch_concurrent(self, mock_request, async_client, mock_response):
 #         """Test async batch scanning with concurrency."""
 #         batch_response = {

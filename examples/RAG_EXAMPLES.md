@@ -9,7 +9,7 @@ This directory contains practical examples demonstrating how to use KoreShield's
 Simple example showing how to scan retrieved documents for threats:
 
 ```python
-from koreshield_sdk import KoreShieldClient
+from koreshield import KoreShieldClient
 
 client = KoreShieldClient(
     api_key="your-key",
@@ -46,7 +46,7 @@ Using KoreShield with LangChain retrievers:
 ```python
 from langchain.vectorstores import Chroma
 from langchain.embeddings import OpenAIEmbeddings
-from koreshield_sdk.integrations.langchain import SecureRetriever
+from koreshield.integrations.langchain import SecureRetriever
 
 # Setup vector store
 embeddings = OpenAIEmbeddings()
@@ -76,7 +76,7 @@ Scanning retrieved CRM data:
 
 ```python
 from simple_salesforce import Salesforce
-from koreshield_sdk import KoreShieldClient
+from koreshield import KoreShieldClient
 
 sf = Salesforce(username='user', password='pass', security_token='token')
 koreshield = KoreShieldClient(api_key="your-key")
@@ -112,7 +112,7 @@ if not result.is_safe:
 Scanning multiple queries and document sets:
 
 ```python
-from koreshield_sdk import KoreShieldClient
+from koreshield import KoreShieldClient
 
 client = KoreShieldClient(api_key="your-key")
 
@@ -150,8 +150,8 @@ for query_info, result in zip(queries_and_docs, results):
 Using helper methods for sophisticated document filtering:
 
 ```python
-from koreshield_sdk import KoreShieldClient
-from koreshield_sdk.types import ThreatLevel
+from koreshield import KoreShieldClient
+from koreshield.types import ThreatLevel
 
 client = KoreShieldClient(api_key="your-key")
 
