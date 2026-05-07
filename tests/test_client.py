@@ -40,7 +40,7 @@ class TestKoreShieldClient:
         """Test client initialization."""
         assert client.auth_config.api_key == "test-key"
         assert client.auth_config.base_url == "https://api.test.com"
-        assert client.session.headers["Authorization"] == "Bearer test-key"
+        assert client.session.headers["X-API-Key"] == "test-key"
 
     @patch('koreshield.client.requests.Session.request')
     def test_scan_prompt_success(self, mock_request, client, mock_response):

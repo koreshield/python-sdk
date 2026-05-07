@@ -4,6 +4,9 @@ A comprehensive Python SDK for integrating KoreShield's LLM security features
 into your applications with ease.
 """
 
+# Must be defined before submodule imports: client/async_client read __version__ via `from . import __version__`.
+__version__ = "0.4.0"
+
 from .client import KoreShieldClient
 from .async_client import AsyncKoreShieldClient
 from .exceptions import (
@@ -58,7 +61,6 @@ from .types import (
     CrossDocumentThreat,
 )
 
-__version__ = "0.3.8"
 __all__ = [
     "KoreShieldClient",
     "AsyncKoreShieldClient",
