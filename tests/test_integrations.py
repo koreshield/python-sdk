@@ -45,6 +45,7 @@ class TestFrameworkIntegrations:
         )
         return client
 
+    @pytest.mark.skipif(not fastapi_available, reason="FastAPI not installed")
     def test_create_fastapi_middleware(self, mock_client):
         """Test FastAPI middleware creation."""
         middleware = create_fastapi_middleware(
@@ -59,6 +60,7 @@ class TestFrameworkIntegrations:
         # Middleware should be a callable that returns a callable
         assert middleware is not None
 
+    @pytest.mark.skipif(not flask_available, reason="Flask not installed")
     def test_create_flask_middleware(self, mock_client):
         """Test Flask middleware creation."""
         middleware = create_flask_middleware(
@@ -86,6 +88,7 @@ class TestFrameworkIntegrations:
         # Should be a class with process_view method
         assert hasattr(middleware_class, 'process_view')
 
+    @pytest.mark.skipif(not fastapi_available, reason="FastAPI not installed")
     @pytest.mark.asyncio
     async def test_fastapi_middleware_scanning(self, mock_client):
         """Test FastAPI middleware request scanning."""
@@ -116,6 +119,7 @@ class TestFrameworkIntegrations:
         # Should return the response
         assert response.status_code == 200
 
+    @pytest.mark.skipif(not fastapi_available, reason="FastAPI not installed")
     @pytest.mark.asyncio
     async def test_fastapi_middleware_exclusion(self, mock_client):
         """Test FastAPI middleware path exclusion."""
@@ -139,6 +143,7 @@ class TestFrameworkIntegrations:
         mock_client.scan_prompt.assert_not_called()
         assert response.status_code == 200
 
+    @pytest.mark.skipif(not flask_available, reason="Flask not installed")
     def test_flask_middleware_scanning(self, mock_client):
         """Test Flask middleware request scanning."""
         middleware = create_flask_middleware(
@@ -214,6 +219,7 @@ class TestFrameworkIntegrations:
         assert response is None
         mock_client.scan_prompt.assert_not_called()
 
+    @pytest.mark.skipif(not fastapi_available, reason="FastAPI not installed")
     @pytest.mark.asyncio
     async def test_fastapi_middleware_blocking(self, mock_client):
         """Test FastAPI middleware threat blocking."""
@@ -245,6 +251,7 @@ class TestFrameworkIntegrations:
         assert response.status_code == 403
         assert "security threat detected" in response.body.decode().lower()
 
+    @pytest.mark.skipif(not flask_available, reason="Flask not installed")
     def test_flask_middleware_blocking(self, mock_client):
         """Test Flask middleware threat blocking."""
         # Configure client to return unsafe result
