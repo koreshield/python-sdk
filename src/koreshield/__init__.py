@@ -5,7 +5,7 @@ into your applications with ease.
 """
 
 # Must be defined before submodule imports: client/async_client read __version__ via `from . import __version__`.
-__version__ = "0.4.0"
+__version__ = "0.4.1"
 
 from .client import KoreShieldClient
 from .async_client import AsyncKoreShieldClient
